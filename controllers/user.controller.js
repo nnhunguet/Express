@@ -3,13 +3,13 @@ var shortid = require('shortid');
 
 module.exports.index = function(req, res) {
     res.render('users/index', {
-        users: db.get('user').value()
+        users: db.get('users').value()
     });
 };
 
 module.exports.search = function(req, res) {
     var q = req.query.q;
-    var matchedUsers = db.get('user').value().filter(function(user) {
+    var matchedUsers = db.get('users').value().filter(function(user) {
         return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     });
     res.render('users/index', {
@@ -27,14 +27,14 @@ module.exports.postCreate = function(req, res) {
         name: req.body.name,
         phone: req.body.phone
     }
-    db.get('user').push(newUser)
+    db.get('users').push(newUser)
       .write();
     res.redirect('/users');
 };
 
 module.exports.getId = function(req, res) {
     var id = req.params.id;
-    var user = db.get('user').find({id: id}).value();
+    var user = db.get('users').find({id: id}).value();
 
     res.render('users/view', {
         user: user

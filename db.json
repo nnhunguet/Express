@@ -1,14 +1,27 @@
 {
-  "user": [
+  "users": [
     {
       "id": "wQwMyjUIf",
       "name": "Hungg",
+      "email": "nnhungjs",
+      "password": "123456",
       "phone": "123"
     },
     {
       "id": "OFKO3CyBm",
       "name": "Pham Thinh",
       "phone": "0123123123"
+    },
+    {
+      "id": "n7RoEInSy",
+      "name": "Nghia Hung",
+      "phone": "123"
+    },
+    {
+      "id": "tMwNIozOK",
+      "name": "123",
+      "phone": "123"
     }
-  ]
+  ],
+  "user": []
 }
