@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var userRoutes = require('./routes/user.route');
 var codersRoutes = require('./routes/coders.route');
-
 var port = 3000;
 
 app.set('view engine', 'pug');
