@@ -14,5 +14,7 @@ html
                         span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='#') User
+            if user
+                p= user.name
         .container.pt-5
             block content
