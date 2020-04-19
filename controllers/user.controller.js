@@ -25,7 +25,8 @@ module.exports.postCreate = function(req, res) {
     var newUser = {
         id: shortid.generate(),
         name: req.body.name,
-        phone: req.body.phone
+        phone: req.body.phone,
+        avatar: req.file.path.slice(7)
     }
     db.get('users').push(newUser)
       .write();

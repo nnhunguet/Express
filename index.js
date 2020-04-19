@@ -8,9 +8,10 @@ var userRoutes = require('./routes/user.route');
 var codersRoutes = require('./routes/coders.route');
 var authRoutes = require('./routes/auth.route');
 var productRoutes = require('./routes/product.route');
+var cartRoutes = require('./routes/cart.route'); 
 
 var authMiddleware = require('./middlewares/auth.middleware');
-
+var sessionMiddleware = require('./middlewares/session.middleware');
 var port = 3000;
 
 app.set('view engine', 'pug');
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 app.use(express.static('public'));
 app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(sessionMiddleware);
 
 app.get('/', function(req, res) {
     res.render('index', {
@@ -32,6 +34,8 @@ app.use('/users',  authMiddleware.requireAuth, userRoutes);
 app.use('/coders-tokyo', codersRoutes);
 app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
+app.use('/cart', cartRoutes);
+
 app.listen(port, function() {
     console.log('Server listening on port ' + port);
 })

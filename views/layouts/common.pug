@@ -13,7 +13,14 @@ html
                         a.nav-link(href='#') Home
                         span.sr-only (current)
                     li.nav-item
-                        a.nav-link(href='#') User
+                        a.nav-link(href='#') Users
+                    li.nav-item
+                        a.nav-link(href='#') Products
+                    li.nav-item
+                        a.nav-link(href='#') 
+                            | Cart
+                            if sumCount
+                                sup=sumCount
             if user
                 p= user.name
         .container.pt-5
