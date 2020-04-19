@@ -1,11 +1,14 @@
 require('dotenv').config();
 
+var cookieParser = require('cookie-parser');
 var express = require('express');
 var app = express();
+
 var userRoutes = require('./routes/user.route');
 var codersRoutes = require('./routes/coders.route');
 var authRoutes = require('./routes/auth.route');
-var cookieParser = require('cookie-parser');
+var productRoutes = require('./routes/product.route');
+
 var authMiddleware = require('./middlewares/auth.middleware');
 
 var port = 3000;
@@ -28,7 +31,7 @@ app.get('/', function(req, res) {
 app.use('/users',  authMiddleware.requireAuth, userRoutes);
 app.use('/coders-tokyo', codersRoutes);
 app.use('/auth', authRoutes);
-
+app.use('/products', productRoutes);
 app.listen(port, function() {
     console.log('Server listening on port ' + port);
 })
