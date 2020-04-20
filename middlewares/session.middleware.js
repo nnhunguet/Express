@@ -12,13 +12,21 @@ module.exports = function(req, res, next) {
         }).write();
     }
 
-    // var productId = req.params.productId;
-    // var sessionId = req.signedCookies.sessionId;
+    var productId = req.params.productId;
+    var sessionId = req.signedCookies.sessionId;
+    var data = db.get('sessions').find({ id: sessionId }).value();
+    var sumCount;
+    if(data) {
+        if(data.cart) {
+            var productId = req.params.productId;
+            var sessionId = req.signedCookies.sessionId;
 
-    // var sumCount = Object.values(db.get('sessions').find({ id: sessionId }).value().cart).reduce(function(acc,cur){
-    //     return acc + cur;
-    // },0);
-    // console.log(sumCount);
-    // res.locals.sumCount = sumCount;
+            sumCount = Object.values(data.cart).reduce(function(acc,cur){
+                return acc + cur;
+            },0);
+            console.log(sumCount);
+        }
+    }
+    res.locals.sumCount = sumCount;
     next()
 }
