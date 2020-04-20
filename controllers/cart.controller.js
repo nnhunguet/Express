@@ -14,18 +14,6 @@ module.exports.addToCart = function(req, res, next) {
     .find({ id: sessionId }) 
     .set('cart.' + productId, count+1)
     .write();
-    
-    var data = db.get('sessions').find({ id: sessionId }).value();
-    if(data.cart) {
-        var productId = req.params.productId;
-        var sessionId = req.signedCookies.sessionId;
-
-        var sumCount = Object.values(data.cart).reduce(function(acc,cur){
-            return acc + cur;
-        },0);
-        console.log(sumCount);
-        res.locals.sumCount = sumCount;
-    }
 
     res.redirect('/products');
 };

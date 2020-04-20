@@ -3,6 +3,7 @@ require('dotenv').config();
 var cookieParser = require('cookie-parser');
 var express = require('express');
 var app = express();
+var csurf = require('csurf');
 
 var userRoutes = require('./routes/user.route');
 var codersRoutes = require('./routes/coders.route');
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(express.static('public'));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
+app.use(csurf({ cookie: true }));
 
 app.get('/', function(req, res) {
     res.render('index', {
@@ -36,7 +38,7 @@ app.use('/coders-tokyo', codersRoutes);
 app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
 app.use('/cart', cartRoutes);
-app.use('/transfer', transferRoutes);
+app.use('/transfer', authMiddleware.requireAuth, transferRoutes);
 
 app.listen(port, function() {
     console.log('Server listening on port ' + port);
