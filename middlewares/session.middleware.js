@@ -24,7 +24,6 @@ module.exports = function(req, res, next) {
             sumCount = Object.values(data.cart).reduce(function(acc,cur){
                 return acc + cur;
             },0);
-            console.log(sumCount);
         }
     }
     res.locals.sumCount = sumCount;
